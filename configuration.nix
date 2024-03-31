@@ -14,7 +14,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "nixos-t480"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -50,9 +50,9 @@
   services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "us";
-    xkbVariant = "";
+    variant = "";
   };
 
   # Enable CUPS to print documents.
@@ -86,24 +86,31 @@
     packages = with pkgs; [
       audacious
       bleachbit
+      discord
+      fastfetch
       filezilla
       firefox
       freefilesync
       gh
       gnome.dconf-editor
+      gnome.gnome-themes-extra
       gnome.gnome-tweaks
       gparted
+      git
       makemkv
       mkvtoolnix
       onlyoffice-bin
       pika-backup
       qbittorrent
+      spotify
       vlc
       vscode-fhs
+      wget
       xfce.thunar
     ];
   };
-
+  
+  # Enable IBUS
   i18n.inputMethod = {
     enabled = "ibus";
     ibus.engines = with pkgs.ibus-engines; [ libpinyin ];
@@ -116,8 +123,8 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    git
-    wget
+    # git
+    # wget
   ];
 
  # Packages to not keep on machine
@@ -142,6 +149,7 @@
   # };
 
   # List services that you want to enable:
+  services.flatpak.enable = true;
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
